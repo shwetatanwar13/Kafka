@@ -1,0 +1,13 @@
+kafka-topics --zookeeper nn01.itversity.com:2181,nn02.itversity.com:2181,rm01.itversity.com:2181 --create --topic testing_sh --partitions 3 --replication-factor 2
+
+kafka-topics --zookeeper nn01.itversity.com:2181,nn02.itversity.com:2181,rm01.itversity.com:2181 --list
+
+kafka-topics --zookeeper nn01.itversity.com:2181,nn02.itversity.com:2181,rm01.itversity.com:2181 --describe testing_sh
+
+Topic:testing_sh        PartitionCount:3        ReplicationFactor:2     Configs:
+        Topic: testing_sh       Partition: 0    Leader: 1001    Replicas: 1001,1003     Isr: 1001,1003
+        Topic: testing_sh       Partition: 1    Leader: 1002    Replicas: 1002,1004     Isr: 1002,1004
+        Topic: testing_sh       Partition: 2    Leader: 1003    Replicas: 1003,1001     Isr: 1003,1001
+
+kafka-console-consumer --bootstrap-server wn01.itversity.com:6667,wn02.itversity.com:6667 --topic testing_sh
+kafka-console-producer --broker-list wn01.itversity.com:6667,wn02.itversity.com:6667 --topic testing_sh
